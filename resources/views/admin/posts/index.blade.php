@@ -21,7 +21,9 @@
                    <td>EDIT</td>
                    <td>DELETE</td>
                 </tr>
+               @endforeach
             </tbody>
         </table>  
+        
    </div>
-@endsection   
+   @endsection
