@@ -66,7 +66,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
