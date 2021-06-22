@@ -10,6 +10,6 @@
     <body>
        <div id="root"></div>
 
-      <script src="{{ asset('js/app.js')}}"></script>
+     <div><h1>Welcome To Public HOME</h1></div>
     </body>
 </html>
