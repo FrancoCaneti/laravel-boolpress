@@ -2,7 +2,10 @@
 
 @section('content')
    <div class="container">
-      <h1 class="mb-5">Create new Post</h1>
+      <h1 class="mb-5">
+      EDIT:
+      <a href="{{route('admin.posts.show', $post->id)}}">{{$post->title}}</a>
+      </h1>
       
       @if ($errors->any())
        <div class="alert alert-danger">
@@ -16,9 +19,9 @@
 
       <div class="row">
           <div class="col-md-8 offset-md-2">
-            <form action="{{ route('admin.posts.store')}}" method="POST">
+            <form action="{{ route('admin.posts.update', $post->id)}}" method="POST">
             @csrf
-            @method('POST')
+            @method('PATCH')
 
              <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
