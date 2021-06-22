@@ -32,7 +32,7 @@
                 <label for="content" class="form-label">Content</label>
                 <textarea class="form-control" name="content" id="content"  rows="6"></textarea>
              </div>
-                <button class="btn btn-primary" type="submit">Create a new Post</button>
+                <button class="btn btn-primary" type="submit">Edit Post</button>
 
             </form>
           </div>

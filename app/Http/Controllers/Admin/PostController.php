@@ -102,7 +102,22 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //Valide
+
+
+        $data =$request->all();
+
+
+        $post = Post::find($id);
+
+        //gen slug
+
+        if($data['title'] != $post->title) {
+            $data['slug'] = Str::slug($data['title'], '-');
+        }
+        $post->update($date); //fillable
+
+        return redirect()->route('admin.posts.show', $post->id);
     }
 
     /**
@@ -113,6 +128,9 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+
+        return redirect()->route('admin.posts.index')->with('delete', $post->title);
     }
 }
