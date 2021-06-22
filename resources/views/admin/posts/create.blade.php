@@ -29,8 +29,19 @@
                 <label for="content" class="form-label">Content</label>
                 <textarea class="form-control" name="content" id="content"  rows="6"></textarea>
              </div>
-                <button class="btn btn-primary" type="submit">Create a new Post</button>
+             <div class="mb-3">
+                  <label for="category_id">Category</label>
+                   <select  class="form-control" name="category_id" id="Category_id ">
+                    <option value="">-- Select Category --</option>
+                    @foreach ($categories as $category)
+                      <option value="{{$category->id}}">{{$category->name}}</option>
+                    @endforeach
+                   </select>     
+               </div>
+                <button class="btn btn-primary" type="submit">Create a new Post  
+               </div>
 
+                </button>
             </form>
           </div>
      </div>
