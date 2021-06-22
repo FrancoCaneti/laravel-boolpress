@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Post;
 
 class PostController extends Controller
@@ -27,7 +28,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -38,7 +39,19 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Validazione
+        $data = $request->all();
+
+        //gen slug
+
+        $data['slug'] = Str::slug($data['title'],'-');
+
+        //crea e salva on db
+       $new_post = new Post();
+       $new_post->fill($data); //<-Fillable
+       $new_post->save();
+
+       return redirect()->route('admin.posts.show', $new_post->id);
     }
 
     /**
@@ -66,7 +79,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.posts.create');
+        
     }
 
     /**
