@@ -40,6 +40,12 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //Validazione
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+        
+
         $data = $request->all();
 
         //gen slug
@@ -79,7 +85,12 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        
+        $post = Post::find($id);
+
+        if(! $post) {
+            abort(404);
+        }
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
