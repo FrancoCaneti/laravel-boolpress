@@ -10,6 +10,8 @@
     <body>
        <div id="root"></div>
 
-     <div><h1>Welcome To Public HOME</h1></div>
+     
+
+     <script src:="{{asset('js/app.js') }}"></script>
     </body>
 </html>
