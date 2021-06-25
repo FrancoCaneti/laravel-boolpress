@@ -18,6 +18,7 @@
             <tr>
                <th>Id</th>
                <td>Title</td>
+               <th>create</th>
                <th colspan='3'>Actions</th>
             </tr>
           </thead>
@@ -30,6 +31,11 @@
                    <a class="btn btn-success"
                    href="{{route('admin.posts.show', $post->id) }}">SHOW</a>
                    </td>
+
+                    <td>
+                       {{ $post->created_at->format('l/m/y') }}
+                    </td>
+
                    <td>
                      <a  class="btn btn-warning" href="{{ route('admin.posts.edit', $post->id) }}">EDIT</a>
                    </td>

@@ -1927,6 +1927,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1936,7 +1960,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      posts: []
+      posts: [],
+      pagination: {}
     };
   },
   created: function created() {
@@ -1947,14 +1972,27 @@ __webpack_require__.r(__webpack_exports__);
     getPosts: function getPosts() {
       var _this = this;
 
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       //Get post from Api
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://127.0.0.1:8000/api/posts").then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://127.0.0.1:8000/api/posts?page=".concat(page)).then(function (res) {
         console.log(res.data);
-        _this.posts = res.data;
-      }).cathc(function (err) {
+        _this.posts = res.data.data;
+        _this.pagination = {
+          current: res.data.current_page,
+          last: res.data.last_page
+        };
+      })["catch"](function (err) {
         console.log(err);
       });
     }
+    /*formatDate(date) {
+      const postDate = new Date(date);
+      let day = postDate.getDate();
+      let month = postDate.getMonth() + 1;
+      let year = postDate.getFullYear();
+        return `${day}/${month}/${year}`;
+    },*/
+
   }
 });
 
@@ -6442,7 +6480,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".container {\n  max-width: 1170px;\n  margin: 0 auto;\n}\nbody {\n  font-family: sans-serif;\n}", ""]);
+exports.push([module.i, ".container {\n  max-width: 1170px;\n  margin: 0 auto;\n}\nbody {\n  font-family: sans-serif;\n}\n.navigation .active-page {\n  background: #90eeee;\n}", ""]);
 
 // exports
 
@@ -38359,11 +38397,74 @@ var render = function() {
               return _c("article", { key: post.id }, [
                 _c("h2", [_vm._v(_vm._s(post.title))]),
                 _vm._v(" "),
-                _c("div", [_vm._v(_vm._s(_vm.posts.created_at))]),
+                _c("div", [_vm._v(_vm._s(/*formatDate(*/ post.create_at))]),
                 _vm._v(" "),
                 _c("a", { attrs: { href: "" } }, [_vm._v("Read more")])
               ])
-            })
+            }),
+            _vm._v(" "),
+            _c(
+              "section",
+              { staticClass: "navigation" },
+              [
+                _c(
+                  "button",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.pagination.current > 1,
+                        expression: "pagination.current > 1"
+                      }
+                    ],
+                    on: {
+                      click: function($event) {
+                        return _vm.getPosts(_vm.pagination.current - 1)
+                      }
+                    }
+                  },
+                  [_vm._v("\n          Prev\n        ")]
+                ),
+                _vm._v(" "),
+                _vm._l(_vm.pagination.last, function(i) {
+                  return _c(
+                    "button",
+                    {
+                      key: "page-" + i,
+                      class: { "active-page": i == _vm.pagination.current },
+                      on: {
+                        click: function($event) {
+                          return _vm.getPosts(i)
+                        }
+                      }
+                    },
+                    [_vm._v("\n          " + _vm._s(i) + "\n        ")]
+                  )
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.pagination.current < _vm.pagination.last,
+                        expression: "pagination.current < pagination.last"
+                      }
+                    ],
+                    on: {
+                      click: function($event) {
+                        return _vm.getPosts(_vm.pagination.current + 1)
+                      }
+                    }
+                  },
+                  [_vm._v("\n          Next\n        ")]
+                )
+              ],
+              2
+            )
           ],
           2
         )
