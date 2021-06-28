@@ -4,8 +4,15 @@
 
     <nav>
       <ul>
-        <li><a href=""></a>Blog</li>
-        <li><a href=""></a>About</li>
+        <li>
+          <router-link :to="{ name: 'home' }">Home</router-link>
+        </li>
+        <li>
+          <router-link :to="{ name: 'blog' }">Blog</router-link>
+        </li>
+        <li>
+          <router-link :to="{ name: 'about' }">About</router-link>
+        </li>
       </ul>
     </nav>
   </header>
@@ -20,5 +27,12 @@ export default {
 <style lang="scss"  scoped>
 header {
   background: lightblue;
+}
+li {
+  list-style: none;
+  padding: 5px 0 0 0;
+}
+.active {
+  color: lightcoral;
 }
 </style>
